@@ -1,0 +1,277 @@
+<html>
+    <head>
+        <title>Form Validation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div class="box" style="">
+            <h1> Form Validation</h1>
+            <div style="margin-top: 15px;">
+                <label class="ct1"> Fname <span style="color: red;">*</span></label>
+                <input type="text" placeholder="Enter your fname" id="fname" class="field"/>
+                <span style="display: none;" id="fnameerr"><i class="fa-solid fa-triangle-exclamation"></i>Firstname is required</span>
+                <span style="display: none;" id="fnamelenerr"><i class="fa-solid fa-triangle-exclamation"></i>Firstname requires atleast 4 characters</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <label class="ct2"> Lname <span style="color: red;">*</span></label>
+                <input type="text" placeholder="Enter your lname" id="lname" class="field"/>
+                <span style="display: none;" id="lnameerr"><i class="fa-solid fa-triangle-exclamation"></i>Lastname requires atleast 1 characters</span>
+                <span style="display: none;" id="lnamelenerr"><i class="fa-solid fa-triangle-exclamation"></i>Lastname requires atleast 1 characters</span>
+
+            </div>
+            <div style="margin-top: 15px;">
+                <label class="ct3"> Email <span style="color: red;">*</span></label>
+                <input type="email" placeholder="Enter your email" id="email" class="field"/>
+                <span style="display: none;" id="emailerr"><i class="fa-solid fa-triangle-exclamation"></i>Email is required</span>
+                <span style="display: none;" id="emailvaliderr"><i class="fa-solid fa-triangle-exclamation"></i>Enter a valid email</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <label class="ct4"> Mobile <span style="color: red;">*</span></label>
+                <input type="number" placeholder="Enter your mobile" id="mobile" class="field"/>
+                <span style="display: none;" id="mobileerr"><i class="fa-solid fa-triangle-exclamation"></i>Mobile is required</span>
+                <span style="display: none;" id="mobilelenerr1"><i class="fa-solid fa-triangle-exclamation"></i>Mobile num must be 10 numbers </span>
+                <span style="display: none;" id="mobilelenerr2"><i class="fa-solid fa-triangle-exclamation"></i>Mobile num must not be more than 10 numbers </span>
+            </div>
+            <div style="margin-top: 15px;">
+                <label class="ct5"> Password <span style="color: red;">*</span></label>
+                <input type="password" placeholder="Enter your password" id="password" class="field"/>
+                <input type="button" value="Show" onclick="showValue()" id="show" class="btn" />
+                <span style="display: none;" id="passerr"><i class="fa-solid fa-triangle-exclamation"></i>Password is required</span>
+                <span style="display: none;" id="passlenerr"><i class="fa-solid fa-triangle-exclamation"></i>Password must be 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character</span>
+            </div>
+            <div style="margin-top: 15px;">
+                <label class="ct6"> Confirm password <span style="color: red;">*</span></label>
+                <input type="password" placeholder="Enter your password again" id="cpassword" class="field"/>
+                <input type="button" value="Show" onclick="showValueAgain()" id="cpass" class="btn1"/>
+                <span style="display: none;" id="cpasserr"><i class="fa-solid fa-triangle-exclamation"></i>To confirm the password enter again
+                </span>
+                <span style="display: none;" id="cpasslenerr"><i class="fa-solid fa-triangle-exclamation"></i>The password does not matches enter the correct password </span>
+            </div>
+            <div style="margin-top: 15px;">
+                <input type="button" value="Submit" onclick="validayeForm()" class="btn2" style="border: 2px solid grey; cursor: pointer ; " />
+            </div>
+        </div>
+        <script>
+            function validayeForm(){
+                var fname = document.getElementById('fname').value;
+                var lname = document.getElementById('lname').value;
+                var email = document.getElementById('email').value;
+                var mobile = document.getElementById('mobile').value;
+                var password = document.getElementById('password').value;
+                var cpassword = document.getElementById('cpassword').value;
+                let valideEmail=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                let matchPass=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+                
+                
+                if(fname){
+                    let fnamelen=fname.length;
+                    document.getElementById('fname').style = "border:2px solid green"
+                    document.getElementById('fnameerr').style = "display:none"
+                    if(fnamelen < 4) {
+                        document.getElementById('fnamelenerr').style = "display:block;color:red;"
+                    } else {
+                        document.getElementById('fnamelenerr').style = "display:none"
+                    }
+                } else{
+                    document.getElementById('fname').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('fnameerr').style = "display:block;color:red;"
+                    document.getElementById('fnamelenerr').style = "display:none"
+                }
+                
+                if(lname){
+                    let lnamelen = lname.length;
+                    document.getElementById('lname').style = "border:2px solid green"
+                    document.getElementById('lnameerr').style = "display:none"
+                    if(lnamelen < 1){
+                        document.getElementById('lnamelenerr').style = "display:block;color:red;"
+                    } else {
+                        document.getElementById('lnamelenerr').style = "display:none"
+                    }
+                } else{
+                    document.getElementById('lname').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('lnameerr').style = "display:block;color:red;"
+                     document.getElementById('lnamelenerr').style = "display:none"
+                }
+                
+                if(email){
+                    let validateEmail=valideEmail.test(email);
+                    document.getElementById('email').style = "border:2px solid green"
+                    document.getElementById('emailerr').style = "display:none"
+                    if(validateEmail== true){
+                        document.getElementById('emailvaliderr').style = "display:none"
+                    } else {
+                        document.getElementById('emailvaliderr').style = "display:block;color:red;"
+                    }
+                } else{
+                    document.getElementById('email').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('emailerr').style = "display:block;color:red;"
+                    document.getElementById('emailvaliderr').style = "display:none"
+                }
+                
+                if(mobile){
+                    let mobilelen=mobile.length;
+                    document.getElementById('mobile').style = "border:2px solid green"
+                    document.getElementById('mobileerr').style = "display:none"
+                    if(mobilelen < 10){
+                        document.getElementById('mobilelenerr1').style = "display:block;color:red;"
+                    } else {
+                        document.getElementById('mobilelenerr1').style = "display:none"
+                    }
+                    if(mobilelen > 10){
+                        document.getElementById('mobilelenerr2').style = "display:block;color:red;"
+                    } else {
+                        document.getElementById('mobilelenerr2').style = "display:none"
+                    }
+                    if(mobilelen == 10){
+                        document.getElementById('mobile').style = "border:2px solid green"
+                    } else {
+                        ocument.getElementById('mobileerr').style = "display:block;color:red;"
+                    }
+                } else{
+                    document.getElementById('mobile').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('mobileerr').style = "display:block;color:red;"
+                    document.getElementById('mobilelenerr1').style = "display:none"
+                    document.getElementById('mobilelenerr2').style = "display:none"
+                }
+
+                if(password){
+                    let matchPassWord=matchPass.test(password);
+                    document.getElementById('password').style = "border:2px solid green"
+                    document.getElementById('passerr').style = "display:none"
+                    if(matchPassWord == true){
+                        document.getElementById('passlenerr').style = "display:none"
+                    } else {
+                        document.getElementById('passlenerr').style = "display:block;color:red;"
+                    }
+                } else{
+                    document.getElementById('password').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('passerr').style = "display:block;color:red;"
+                }
+
+                if(cpassword){
+                    document.getElementById('cpassword').style = "border:2px solid green"
+                    document.getElementById('cpasserr').style = "display:none"
+                    if(cpassword != password){
+                        document.getElementById('cpasslenerr').style = "display:block;color:red;"
+                    } else {
+                        document.getElementById('cpasslenerr').style = "display:none"
+                    }
+                } else{
+                    document.getElementById('cpassword').style = "border:2px solid red;border:2px solid red"
+                    document.getElementById('cpasserr').style = "display:block;color:red;"
+
+                }
+            }
+
+            function showValue(){
+                var type = document.getElementById('password').type;
+                if (type == 'password'){
+                    document.getElementById('password').type = 'taxt';
+                    document.getElementById('show').value = 'Hide';
+                } else{
+                    document.getElementById('show').value = 'Show';
+                    document.getElementById('password').type = 'password';
+                }
+            }
+
+            function showValueAgain(){
+                var type = document.getElementById('cpassword').type;
+                if (type == 'password'){
+                    document.getElementById('cpassword').type = 'taxt';
+                    document.getElementById('cpass').value = 'Hide';
+                } else{
+                    document.getElementById('cpass').value = 'Show';
+                    document.getElementById('cpassword').type = 'password';
+                }
+            }
+        </script>
+        <style>
+            body{
+                text-align: center;
+                background-image: url(img4.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .field{
+                height: 25px;
+                width: 200px;
+                padding: 10px;
+                border: 1px solid;
+                outline: 0;
+                cursor: pointer;
+            }
+            .box{
+                width: 410px;
+                text-align: center;
+                height: 540px;
+                margin-top: 25px;
+                border-radius: 30px;
+                scale: 1;
+                background: #ffffff00;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            }
+            .ct1{
+                margin-left: 21px;
+                cursor: pointer;
+            }
+            .ct2{
+                margin-left: 21px;
+                cursor: pointer;
+            }
+            .ct3{
+                margin-left: 28px;
+                cursor: pointer;
+            }
+            .ct4{
+                margin-left: 21px;
+                cursor: pointer;
+            }
+            .ct5{
+                margin-left: 57px;
+                cursor: pointer;
+            }
+            .btn{
+                height: 22px;
+                width: 48px;
+                background: snow;
+                font-weight: 600;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+            .btn1{
+                height: 22px;
+                width: 48px;
+                background: snow;
+                font-weight: 600;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+            }
+            .btn2{
+                padding: 5px;
+                width: 99px;
+                margin-top: 20px;
+                border-radius: 10px;
+                border: none;
+                background: snow;
+                font-weight: 600;
+                cursor: pointer;
+            }
+        </style>
+    </body>
+</html>
+
+<!-- let phoneregex = /^[0-9]+$/;
+let phoneresult = phoneregex.test(phone);
+let passwordregex =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+let passwordresult = passwordregex.test(password); -->
